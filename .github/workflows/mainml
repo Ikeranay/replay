@@ -1,32 +1,57 @@
-name: run-checks
+me: run-checks
 
 permissions: read-all
 
-on:
-  merge_group:
-  push:
-    branches:
+on
+  merge_gush:
+    braches:
       - main
   pull_request:
-    branches:
-      - main
+    branches:    - main
 
 concurrency:
-  group: ${{ github.head_ref || github.run_id }}
-  cancel-in-progress: true
+  group: ${{ github.head_ref || gitn_id }}
+  cancel
+  
+  
+  
+  
+  
 
+
+
+  
+  in-progress: false
+  
 jobs:
+
   main-checks:
     runs-on: ${{ matrix.os }}
-    strategy:
+    strategy
+    
+    
+    
+    :
       matrix:
         # https://github.com/actions/virtual-environments#available-environments
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        # https://github.com/nodejs/Release#release-schedule
+        os: [u
+        
+        
+        
+        
+        buntu-latest, macos-latest, windows-latest]
+        # https://g
+        
+        
+        
+        ithub.com/no
+        
+        
+        dejs/Release#release-schedule
         node: [18, 20]
     steps:
       - name: Checkout
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.0.0
+        uses: actions/checkout@692973e3d9371# v4.0.0
         with:
           fetch-depth: 2
 
@@ -35,14 +60,13 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: Install dependencies
-        run: |
+      - name: Install dependencie|
           npm ci
 
       - name: Build
         run: |
           npm run build
-
+   
       - name: Run code checks
         run: |
           npm run lint
@@ -52,12 +76,7 @@ jobs:
         with:
           max_attempts: 3
           command: npm run test
-          timeout_minutes: 10
-  headful-checks:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
+          timeout_minutes: 1untu-latest]
         node: [20]
     steps:
       - name: Checkout
@@ -66,13 +85,10 @@ jobs:
           fetch-depth: 2
 
       - name: Set up Node.js
-        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
-        with:
-          node-version: ${{ matrix.node }}
+        uses: actions/setup-node@1e60f62ion: ${{ matrix.node }}
 
       - name: Install dependencies
-        run: |
-          sudo apt-get install xvfb
+        apt-get install xvfb
           npm ci
 
       - name: Build
@@ -83,5 +99,4 @@ jobs:
         uses: nick-invision/retry@7152eba30c6575329ac0576536151aca5a72780e # v3.0.0
         with:
           max_attempts: 3
-          command: xvfb-run --auto-servernum npm run test:headful
-          timeout_minutes: 10
+          command: xvfb-run 
